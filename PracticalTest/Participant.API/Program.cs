@@ -1,10 +1,13 @@
 using Participant.Application;
 using Participant.Infrastructure;
 using Participant.Infrastructure.Context;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console());
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
