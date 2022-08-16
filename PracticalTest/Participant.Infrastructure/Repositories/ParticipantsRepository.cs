@@ -28,8 +28,6 @@ namespace Participant.Infrastructure.Repositories
                                                 .ToListAsync(),
                 _ => await _dbContext.Participants
                                                 .Where(p => p.Name == name && p.NIK == NIK)
-                                                .OrderBy(n => n.Name)
-                                                .ThenBy(n => n.NIK)
                                                 .ToListAsync(),
             };
         }

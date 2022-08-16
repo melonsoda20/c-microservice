@@ -4,6 +4,7 @@
     {
         public enum ENUM_ORDER
         {
+            DEFAULT,
             ASC,
             DESC
         }

@@ -1,10 +1,11 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Participant.Application.Behaviours;
 using Participant.Application.Contracts.Services;
+using Participant.Application.Contracts.Services.Shared;
 using Participant.Application.Services;
+using Participant.Application.Services.Shared;
 using System.Reflection;
 
 namespace Participant.Application
@@ -21,7 +22,7 @@ namespace Participant.Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
 
             services.AddScoped<ISportEventServices, SportEventServices>();
-
+            services.AddScoped<IAPIServices, APIServices>();
             return services;
         }
     }

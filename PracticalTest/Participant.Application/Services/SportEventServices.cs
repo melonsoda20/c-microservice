@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Participant.Application.Contracts.Services;
+using Participant.Application.Contracts.Services.Shared;
+using Participant.Application.Models.Services.Shared;
 using Participant.Domain.Services;
 using static Participant.Application.Constants.Constants;
 
@@ -10,10 +12,15 @@ namespace Participant.Application.Services
     {
         private readonly IConfiguration _configuration;
         private string eventAPIBaseURL = "";
+        private readonly IAPIServices _apiServices;
 
-        public SportEventServices(IConfiguration configuration)
+        public SportEventServices(
+            IConfiguration configuration,
+            IAPIServices apiServices
+        )
         {
             _configuration = configuration;
+            _apiServices = apiServices;
             eventAPIBaseURL = _configuration[AppSettingsKey.EVENT_API_BASE_URL_KEY];
         }
 
@@ -28,7 +35,9 @@ namespace Participant.Application.Services
                 };
             }
             string apiURL = $"{eventAPIBaseURL}/sport-events/{eventsParams.EventID}";
-            var response = await GetAPI(apiURL, eventsParams.Token);
+            var getAPIParams = new GetAPIParams(apiURL, eventsParams.Token);
+
+            var response = await _apiServices.GetAPI(getAPIParams);
             
             if (response.IsSuccessStatusCode)
             {
@@ -45,16 +54,6 @@ namespace Participant.Application.Services
                 IsError = true,
                 ErrorMessage = response.Content.ToString()
             };
-        }
-
-        private async Task<HttpResponseMessage> GetAPI(string apiURL, string? token = null)
-        {
-            HttpClient client = new HttpClient();
-            if (!string.IsNullOrEmpty(token))
-            {
-                client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
-            }
-            return await client.GetAsync(apiURL);
         }
     }
 }

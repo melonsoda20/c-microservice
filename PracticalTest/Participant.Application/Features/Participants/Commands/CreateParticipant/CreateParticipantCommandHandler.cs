@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Participant.Application.Contracts.Repositories;
 using Participant.Application.Features.SportEvents.Queries.GetEvent;
