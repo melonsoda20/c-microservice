@@ -1,7 +1,7 @@
 ﻿using Participant.Domain.Entities;
 using static Participant.Application.Constants.Constants;
 
-namespace Participant.Application.Contracts
+namespace Participant.Application.Contracts.Repositories
 {
     public interface IParticipantsRepository : IAsyncRepository<Participants>
     {

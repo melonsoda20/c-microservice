@@ -1,4 +1,4 @@
-﻿namespace Participant.Domain.Entities
+﻿namespace Participant.Domain.Services
 {
     public class Organizer
     {

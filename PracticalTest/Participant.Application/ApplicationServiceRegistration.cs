@@ -2,6 +2,8 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Participant.Application.Behaviours;
+using Participant.Application.Contracts.Services;
+using Participant.Application.Services;
 using System.Reflection;
 
 namespace Participant.Application
@@ -16,6 +18,8 @@ namespace Participant.Application
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(UnhandledExceptionBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
+
+            services.AddScoped<ISportEventServices, SportEventServices>();
 
             return services;
         }

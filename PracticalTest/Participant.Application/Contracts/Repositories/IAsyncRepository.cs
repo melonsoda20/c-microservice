@@ -1,7 +1,7 @@
 ﻿using Participant.Domain.Entities.Common;
 using System.Linq.Expressions;
 
-namespace Participant.Application.Contracts
+namespace Participant.Application.Contracts.Repositories
 {
     public interface IAsyncRepository<T> where T : BaseEntity
     {
