@@ -8,5 +8,6 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
         public string? NIK { get; set; }
         public string? Address { get; set; }
         public int EventID { get; set; }
+        public string? Token { get; set; }
     }
 }

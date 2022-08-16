@@ -14,6 +14,10 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
                 .NotEmpty().WithMessage("{NIK} is required.")
                 .NotNull()
                 .Length(16, 16).WithMessage("{NIK} must be 16 digits");
+
+            RuleFor(p => p.Token)
+                .NotEmpty().WithMessage("{Token} is required.")
+                .NotNull();
         }
     }
 }

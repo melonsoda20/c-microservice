@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Participant.Application.Contracts.Repositories;
 using Participant.Application.Features.SportEvents.Queries.GetEvent;
@@ -13,7 +14,12 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
         private readonly IMapper _mapper;
         private readonly ILogger<CreateParticipantCommandHandler> _logger;
 
-        public CreateParticipantCommandHandler(IMediator mediator, IParticipantsRepository participantsRepository, IMapper mapper, ILogger<CreateParticipantCommandHandler> logger)
+        public CreateParticipantCommandHandler(
+            IMediator mediator,
+            IParticipantsRepository participantsRepository, 
+            IMapper mapper, 
+            ILogger<CreateParticipantCommandHandler> logger
+           )
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _participantsRepository = participantsRepository ?? throw new ArgumentNullException(nameof(participantsRepository));
@@ -27,7 +33,7 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
             _logger.LogInformation("Mapping get event params");
             _mapper.Map(request, getEventQuery, typeof(CreateParticipantCommand), typeof(GetEventQuery));
             var eventResponse = await _mediator.Send(getEventQuery);
-            if (!eventResponse.IsError)
+            if (eventResponse.IsError)
             {
                 _logger.LogError($"Error: {eventResponse.ErrorMessage}");
                 return false;
@@ -35,6 +41,7 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
             var participantsEntity = new Domain.Entities.Participants();
             _mapper.Map(request, participantsEntity, typeof(CreateParticipantCommand), typeof(Domain.Entities.Participants));
             _mapper.Map(eventResponse, participantsEntity, typeof(GetEventResult), typeof(Domain.Entities.Participants));
+            participantsEntity.CreatedBy = participantsEntity.Name;
             await _participantsRepository.AddAsync(participantsEntity);
 
             return true;

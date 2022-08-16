@@ -11,7 +11,7 @@ namespace Participant.Infrastructure.Context
         }
         public DbSet<Participants> Participants { get; set; }
 
-        public Task<int> SaveChangesAsync(string name, CancellationToken cancellationToken = new CancellationToken())
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
             {
@@ -19,11 +19,9 @@ namespace Participant.Infrastructure.Context
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedDate = DateTime.Now;
-                        entry.Entity.CreatedBy = name;
                         break;
                     case EntityState.Modified:
                         entry.Entity.LastModifiedDate = DateTime.Now;
-                        entry.Entity.LastModifiedBy = name;
                         break;
                 }
             }
