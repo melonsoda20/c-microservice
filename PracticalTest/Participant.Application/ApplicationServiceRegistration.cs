@@ -24,6 +24,7 @@ namespace Participant.Application
             services.AddScoped<ISportEventServices, SportEventServices>();
             services.AddScoped<IAPIServices, APIServices>();
             services.AddScoped<IMapperServices, MapperServices>();
+            services.AddScoped(typeof(ILoggerServices<>), typeof(LoggerServices<>));
             return services;
         }
     }

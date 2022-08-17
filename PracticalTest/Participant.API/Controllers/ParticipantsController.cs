@@ -1,14 +1,11 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Participant.Application.Features.Participants.Commands.CreateParticipant;
 using System.Net;
 
 namespace Participant.API.Controllers
 {
-    [ApiController]
-    [Route("api/v1/[controller]")]
-    public class ParticipantsController : ControllerBase
+    public class ParticipantsController : BaseController
     {
         private readonly IMediator _mediator;
 

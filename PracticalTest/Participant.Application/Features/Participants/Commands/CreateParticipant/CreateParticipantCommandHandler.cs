@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using Microsoft.Extensions.Logging;
+﻿using MediatR;
 using Participant.Application.Contracts.Repositories;
 using Participant.Application.Contracts.Services.Shared;
 using Participant.Application.Features.SportEvents.Queries.GetEvent;
@@ -12,30 +10,30 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
         private readonly IMediator _mediator;
         private readonly IParticipantsRepository _participantsRepository;
         private readonly IMapperServices _mapperServices;
-        private readonly ILogger<CreateParticipantCommandHandler> _logger;
+        private readonly ILoggerServices<CreateParticipantCommandHandler> _loggerServices;
 
         public CreateParticipantCommandHandler(
             IMediator mediator,
             IParticipantsRepository participantsRepository,
-            IMapperServices mapperServices, 
-            ILogger<CreateParticipantCommandHandler> logger
+            IMapperServices mapperServices,
+            ILoggerServices<CreateParticipantCommandHandler> loggerServices
            )
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
             _participantsRepository = participantsRepository ?? throw new ArgumentNullException(nameof(participantsRepository));
             _mapperServices = mapperServices ?? throw new ArgumentNullException(nameof(mapperServices));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _loggerServices = loggerServices ?? throw new ArgumentNullException(nameof(loggerServices));
         }
 
         public async Task<bool> Handle(CreateParticipantCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Mapping get event params");
+            _loggerServices.LogInformation("Mapping get event params");
             var getEventQuery = _mapperServices.MapObjects<CreateParticipantCommand, GetEventQuery>(request);
 
             var eventResponse = await _mediator.Send(getEventQuery);
             if (eventResponse.IsError)
             {
-                _logger.LogError($"Error: {eventResponse.ErrorMessage}");
+                _loggerServices.LogError($"Error: {eventResponse.ErrorMessage}");
                 return false;
             }
             var participantsEntity = _mapperServices.MapObjects<CreateParticipantCommand, Domain.Entities.Participants>(request);
