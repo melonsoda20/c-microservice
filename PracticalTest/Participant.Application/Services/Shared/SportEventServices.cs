@@ -9,7 +9,6 @@ namespace Participant.Application.Services.Shared
     public class SportEventServices : ISportEventServices
     {
         private readonly IConfiguration _configuration;
-        private string eventAPIBaseURL = "";
         private readonly IAPIServices _apiServices;
 
         public SportEventServices(
@@ -19,11 +18,16 @@ namespace Participant.Application.Services.Shared
         {
             _configuration = configuration;
             _apiServices = apiServices;
-            eventAPIBaseURL = _configuration[AppSettingsKey.EVENT_API_BASE_URL_KEY];
+        }
+
+        private string GetEventAPIURl()
+        {
+            return _configuration[AppSettingsKey.EVENT_API_BASE_URL_KEY].TrimEnd('/');
         }
 
         public async Task<GetSportEventResults> GetEvent(GetSportEventsParams eventsParams)
         {
+            string eventAPIBaseURL = GetEventAPIURl();
             if (string.IsNullOrEmpty(eventAPIBaseURL))
             {
                 return new GetSportEventResults
