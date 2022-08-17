@@ -8,7 +8,7 @@
         public GetAPIParams(string url, string token)
         {
             RequestURL = url;
-            AuthorizationHeader = $"Bearer {token}";
+            AuthorizationHeader = token;
         }
     }
 }

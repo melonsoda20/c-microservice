@@ -2,6 +2,7 @@
 using Participant.Application.Features.Participants.Commands.CreateParticipant;
 using Participant.Application.Features.SportEvents.Queries.GetEvent;
 using Participant.Application.Models.Tasks;
+using Participant.Application.Services.DTOs;
 using Participant.Domain.Entities;
 using Participant.Domain.Services;
 
@@ -15,6 +16,7 @@ namespace Participant.Application.Mappings
             CreateMap<CreateParticipantCommandRequest, GetEventQuery>().ReverseMap();
             CreateMap<CreateParticipantCommandRequest, Participants>().ReverseMap();
             CreateMap<CreateParticipantCommand, CreateParticipantCommandRequest>().ReverseMap();
+            CreateMap<CreateParticipantDTO, CreateParticipantCommand>().ReverseMap();
             #endregion
 
             #region GetEvent
