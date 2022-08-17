@@ -1,6 +1,6 @@
 ﻿using Participant.Domain.Services;
 
-namespace Participant.Application.Contracts.Services
+namespace Participant.Application.Contracts.Services.Shared
 {
     public interface ISportEventServices
     {

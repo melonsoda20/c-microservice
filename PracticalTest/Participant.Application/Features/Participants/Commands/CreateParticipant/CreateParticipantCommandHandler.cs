@@ -30,7 +30,7 @@ namespace Participant.Application.Features.Participants.Commands.CreateParticipa
             _loggerServices.LogInformation("Mapping get event params");
             var getEventQuery = _mapperServices.MapObjects<CreateParticipantCommand, GetEventQuery>(request);
 
-            var eventResponse = await _mediator.Send(getEventQuery);
+            var eventResponse = await _mediator.Send(getEventQuery, cancellationToken);
             if (eventResponse.IsError)
             {
                 _loggerServices.LogError($"Error: {eventResponse.ErrorMessage}");

@@ -2,10 +2,10 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Participant.Application.Behaviours;
-using Participant.Application.Contracts.Services;
 using Participant.Application.Contracts.Services.Shared;
-using Participant.Application.Services;
+using Participant.Application.Contracts.Services.Tasks;
 using Participant.Application.Services.Shared;
+using Participant.Application.Services.Tasks;
 using System.Reflection;
 
 namespace Participant.Application
@@ -25,6 +25,7 @@ namespace Participant.Application
             services.AddScoped<IAPIServices, APIServices>();
             services.AddScoped<IMapperServices, MapperServices>();
             services.AddScoped(typeof(ILoggerServices<>), typeof(LoggerServices<>));
+            services.AddScoped<IGetEventQueryServices, GetEventQueryServices>();
             return services;
         }
     }

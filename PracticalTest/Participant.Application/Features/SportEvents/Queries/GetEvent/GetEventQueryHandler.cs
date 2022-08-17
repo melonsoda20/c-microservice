@@ -1,19 +1,19 @@
 ﻿using MediatR;
-using Participant.Application.Contracts.Services;
 using Participant.Application.Contracts.Services.Shared;
-using Participant.Domain.Services;
+using Participant.Application.Contracts.Services.Tasks;
+using Participant.Application.Models.Tasks;
 
 namespace Participant.Application.Features.SportEvents.Queries.GetEvent
 {
     public class GetEventQueryHandler : IRequestHandler<GetEventQuery, GetEventResult>
     {
-        private readonly ISportEventServices _sportEventServices;
+        private readonly IGetEventQueryServices _getEventQueryServices;
         private readonly IMapperServices _mapperServices;
         private readonly ILoggerServices<GetEventQueryHandler> _loggerServices;
 
-        public GetEventQueryHandler(ISportEventServices sportEventServices, IMapperServices mapperServices, ILoggerServices<GetEventQueryHandler> loggerServices)
+        public GetEventQueryHandler(IGetEventQueryServices getEventQueryServices, IMapperServices mapperServices, ILoggerServices<GetEventQueryHandler> loggerServices)
         {
-            _sportEventServices = sportEventServices ?? throw new ArgumentNullException(nameof(sportEventServices));
+            _getEventQueryServices = getEventQueryServices ?? throw new ArgumentNullException(nameof(getEventQueryServices));
             _mapperServices = mapperServices ?? throw new ArgumentNullException(nameof(mapperServices));
             _loggerServices = loggerServices ?? throw new ArgumentNullException(nameof(loggerServices));
         }
@@ -21,11 +21,11 @@ namespace Participant.Application.Features.SportEvents.Queries.GetEvent
         public async Task<GetEventResult> Handle(GetEventQuery request, CancellationToken cancellationToken)
         {
             _loggerServices.LogInformation("Mapping request params");
-            GetSportEventsParams requestParams = _mapperServices.MapObjects<GetEventQuery, GetSportEventsParams>(request);
+            GetEventQueryParams requestParams = _mapperServices.MapObjects<GetEventQuery, GetEventQueryParams>(request);
             _loggerServices.LogInformation("Retrieving event data");
-            var eventData = await _sportEventServices.GetEvent(requestParams);
+            var eventData = await _getEventQueryServices.GetEvent(requestParams);
             _loggerServices.LogInformation("Mapping event response data");
-            GetEventResult result = _mapperServices.MapObjects<GetSportEventResults, GetEventResult>(eventData);
+            GetEventResult result = _mapperServices.MapObjects<GetEventQueryResponse, GetEventResult>(eventData);
             return result;
         }
     }

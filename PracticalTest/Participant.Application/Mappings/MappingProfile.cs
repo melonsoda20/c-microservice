@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Participant.Application.Features.Participants.Commands.CreateParticipant;
 using Participant.Application.Features.SportEvents.Queries.GetEvent;
+using Participant.Application.Models.Tasks;
 using Participant.Domain.Entities;
 using Participant.Domain.Services;
 
@@ -17,8 +18,10 @@ namespace Participant.Application.Mappings
 
             #region GetEvent
             CreateMap<GetEventResult, Participants>().ReverseMap();
-            CreateMap<GetEventQuery, GetSportEventsParams>().ReverseMap();
-            CreateMap<GetSportEventResults, GetEventResult>().ReverseMap();
+            CreateMap<GetEventQueryParams, GetSportEventsParams>().ReverseMap();
+            CreateMap<GetSportEventResults, GetEventQueryResponse>().ReverseMap();
+            CreateMap<GetEventQuery, GetEventQueryParams>().ReverseMap();
+            CreateMap<GetEventQueryResponse, GetEventResult>().ReverseMap();
             #endregion
         }
     }

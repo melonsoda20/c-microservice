@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Participant.Application.Contracts.Services;
 using Participant.Application.Contracts.Services.Shared;
 using Participant.Application.Models.Services.Shared;
 using Participant.Domain.Services;
 using static Participant.Application.Constants.Constants;
 
-namespace Participant.Application.Services
+namespace Participant.Application.Services.Shared
 {
     public class SportEventServices : ISportEventServices
     {
@@ -38,7 +37,7 @@ namespace Participant.Application.Services
             var getAPIParams = new GetAPIParams(apiURL, eventsParams.Token);
 
             var response = await _apiServices.GetAPI(getAPIParams);
-            
+
             if (response.IsSuccessStatusCode)
             {
                 var responseMessage = await response.Content.ReadAsStringAsync();
