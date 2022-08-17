@@ -12,8 +12,9 @@ namespace Participant.Application.Mappings
         public MappingProfile()
         {
             #region CreateParticipant
-            CreateMap<CreateParticipantCommand, GetEventQuery>().ReverseMap();
-            CreateMap<CreateParticipantCommand, Participants>().ReverseMap();
+            CreateMap<CreateParticipantCommandRequest, GetEventQuery>().ReverseMap();
+            CreateMap<CreateParticipantCommandRequest, Participants>().ReverseMap();
+            CreateMap<CreateParticipantCommand, CreateParticipantCommandRequest>().ReverseMap();
             #endregion
 
             #region GetEvent

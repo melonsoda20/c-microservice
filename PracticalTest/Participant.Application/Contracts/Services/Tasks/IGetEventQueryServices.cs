@@ -4,6 +4,6 @@ namespace Participant.Application.Contracts.Services.Tasks
 {
     public interface IGetEventQueryServices
     {
-        Task<GetEventQueryResponse> GetEvent(GetEventQueryParams request);
+        Task<GetEventQueryResponse> GetEvent(GetEventQueryParams request, CancellationToken cancellationToken);
     }
 }

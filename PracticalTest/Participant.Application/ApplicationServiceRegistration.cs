@@ -26,6 +26,7 @@ namespace Participant.Application
             services.AddScoped<IMapperServices, MapperServices>();
             services.AddScoped(typeof(ILoggerServices<>), typeof(LoggerServices<>));
             services.AddScoped<IGetEventQueryServices, GetEventQueryServices>();
+            services.AddScoped<ICreateParticipantCommandServices, CreateParticipantCommandServices>();
             return services;
         }
     }

@@ -23,7 +23,7 @@ namespace Participant.Application.Features.SportEvents.Queries.GetEvent
             _loggerServices.LogInformation("Mapping request params");
             GetEventQueryParams requestParams = _mapperServices.MapObjects<GetEventQuery, GetEventQueryParams>(request);
             _loggerServices.LogInformation("Retrieving event data");
-            var eventData = await _getEventQueryServices.GetEvent(requestParams);
+            var eventData = await _getEventQueryServices.GetEvent(requestParams, cancellationToken);
             _loggerServices.LogInformation("Mapping event response data");
             GetEventResult result = _mapperServices.MapObjects<GetEventQueryResponse, GetEventResult>(eventData);
             return result;

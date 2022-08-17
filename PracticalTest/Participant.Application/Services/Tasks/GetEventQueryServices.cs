@@ -16,7 +16,7 @@ namespace Participant.Application.Services.Tasks
             _mapperServices = mapperServices;
         }
 
-        public async Task<GetEventQueryResponse> GetEvent(GetEventQueryParams request)
+        public async Task<GetEventQueryResponse> GetEvent(GetEventQueryParams request, CancellationToken cancellationToken)
         {
             GetSportEventsParams requestParams = _mapperServices.MapObjects<GetEventQueryParams, GetSportEventsParams>(request);
             var eventData = await _sportEventServices.GetEvent(requestParams);
