@@ -1,4 +1,4 @@
-﻿namespace Participant.Application.Services.DTOs
+﻿namespace Participant.Application.Models.DTOs
 {
     public class CreateParticipantDTO
     {

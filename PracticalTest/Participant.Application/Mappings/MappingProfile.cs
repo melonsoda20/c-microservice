@@ -2,9 +2,9 @@
 using Participant.Application.Features.Participants.Commands.CreateParticipant;
 using Participant.Application.Features.SportEvents.Queries.GetEvent;
 using Participant.Application.Models.Tasks;
-using Participant.Application.Services.DTOs;
+using Participant.Application.Models.DTOs;
 using Participant.Domain.Entities;
-using Participant.Domain.Services;
+using Participant.Application.Models.Services.Shared;
 
 namespace Participant.Application.Mappings
 {

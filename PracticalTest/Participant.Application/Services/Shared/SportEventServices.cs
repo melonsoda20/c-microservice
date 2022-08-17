@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Participant.Application.Contracts.Services.Shared;
 using Participant.Application.Models.Services.Shared;
-using Participant.Domain.Services;
 using static Participant.Application.Constants.Constants;
 
 namespace Participant.Application.Services.Shared

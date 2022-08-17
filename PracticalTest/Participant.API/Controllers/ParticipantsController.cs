@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Participant.Application.Contracts.Services.Shared;
 using Participant.Application.Features.Participants.Commands.CreateParticipant;
-using Participant.Application.Services.DTOs;
+using Participant.Application.Models.DTOs;
 using System.Net;
 
 namespace Participant.API.Controllers

@@ -1,7 +1,7 @@
 ﻿using Participant.Application.Contracts.Services.Shared;
 using Participant.Application.Contracts.Services.Tasks;
 using Participant.Application.Models.Tasks;
-using Participant.Domain.Services;
+using Participant.Application.Models.Services.Shared;
 
 namespace Participant.Application.Services.Tasks
 {

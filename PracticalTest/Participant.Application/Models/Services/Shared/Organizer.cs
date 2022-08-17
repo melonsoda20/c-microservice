@@ -1,4 +1,4 @@
-﻿namespace Participant.Domain.Services
+﻿namespace Participant.Application.Models.Services.Shared
 {
     public class Organizer
     {

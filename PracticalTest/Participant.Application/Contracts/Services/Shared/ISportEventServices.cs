@@ -1,4 +1,4 @@
-﻿using Participant.Domain.Services;
+﻿using Participant.Application.Models.Services.Shared;
 
 namespace Participant.Application.Contracts.Services.Shared
 {
